@@ -1,5 +1,10 @@
+'use client'
+
+import { checkIsPublicRoute } from '@/functions/check-is-public-route'
 import './globals.css'
 import { Inter } from 'next/font/google'
+import {usePathname} from 'next/navigation'
+import { PrivateRoute } from '@/components/Private'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -13,9 +18,19 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
+  const pathname = usePathname()
+
+  const isPublicPage = checkIsPublicRoute(pathname!)
+
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <div>
+          {isPublicPage && children}
+
+          {!isPublicPage && <PrivateRoute>{children}</PrivateRoute>}
+        </div>
+      </body>
     </html>
   )
 }
