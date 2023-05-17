@@ -5,6 +5,8 @@ import './globals.css'
 import { Inter } from 'next/font/google'
 import {usePathname} from 'next/navigation'
 import { PrivateRoute } from '@/components/Private'
+import { Toaster } from 'react-hot-toast'
+import ProvidersWrapper from '@/components/SessionWrapper/page'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -25,11 +27,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <div>
-          {isPublicPage && children}
+        <ProvidersWrapper>
+          <div>
+            <Toaster/>
+            {isPublicPage && children}
 
-          {!isPublicPage && <PrivateRoute>{children}</PrivateRoute>}
-        </div>
+            {!isPublicPage && <PrivateRoute>{children}</PrivateRoute>}
+          </div>
+        </ProvidersWrapper>
       </body>
     </html>
   )
