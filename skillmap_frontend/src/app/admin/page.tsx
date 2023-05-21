@@ -1,12 +1,14 @@
 'use client'
 
 import CreateRoadmap from "@/components/CreateRoadmap";
+import axios from "axios";
 import { useState } from "react";
 import { useForm } from 'react-hook-form'
+import { toast } from "react-hot-toast";
 
 type NewTopicTypes = {
     category: string,
-    name: FileList,
+    name: string,
     img: any,
     overview: {
         creators: string,
@@ -29,8 +31,44 @@ export default function AdminPage(){
     const { register, handleSubmit } = useForm<NewTopicTypes>()
     const [roadmap, setRoadmap] = useState<{name:  string}[]>()
 
-    function handleCreateTopic(data: NewTopicTypes){
-        console.log({...data, test: roadmap})
+    let imageFormData : FormData = new FormData()
+
+    async function handleCreateTopic(data: NewTopicTypes){
+        const renamedFile = new File(
+            [data.img[0]], `${data.category.toLowerCase().replace(/ /g, "")
+            .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+            .replace(/[^\w\s]/gi, "")
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .replace(/[^\w\s-]/gi, "")
+        
+        }-${
+            data.name.toLowerCase().replace(/ /g, "")
+            .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+            .replace(/[^\w\s]/gi, "")
+            .normalize("NFD")
+            .replace(/[\u0300-\u036f]/g, "")
+            .replace(/[^\w\s-]/gi, "")}`, {type: data.img[0].type})
+            console.log(renamedFile.type)
+        imageFormData.append('file', renamedFile)
+
+        axios.post(`${process.env.NEXT_PUBLIC_API}/topics/create`, data)
+        .then(async (response)=>{
+            if(response.status ===201){
+                await axios({
+                    method: "post",
+                    url: `${process.env.NEXT_PUBLIC_API}/storage/upload`,
+                    data: imageFormData,
+                    headers: { "Content-Type": "multipart/form-data" },    
+                })
+                .then((imgUpload)=>{
+                    console.log(imgUpload)
+                })
+            }
+        })
+        
+
+
     }
 
     return( 
