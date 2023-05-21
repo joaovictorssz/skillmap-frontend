@@ -8,9 +8,12 @@ import toast from 'react-hot-toast'
 import axios from 'axios'
 import { useRouter } from 'next/navigation'
 import GoogleLogin from '@/components/GoogleLogin'
-import {useState} from 'react'
+import {useContext, useState} from 'react'
+import { userContext } from '@/contexts/UserContext'
 
 export default function Login(){
+
+    const { user,configUser } = useContext(userContext)
 
     const { push } = useRouter()
 
@@ -26,8 +29,28 @@ export default function Login(){
             }
 
             if(res.status === 201){
-                localStorage.setItem("token", res.data.token)
-                push("/home")
+                sessionStorage.setItem("token", res.data.token)
+                axios.get(`${process.env.NEXT_PUBLIC_API}/users/${data.email}`)
+                .then((response)=>{
+                    console.log(response)
+                    if(response.status === 200){
+                        configUser!({
+                             birth_date: 'tetes',
+                             e_mail: response.data.email,
+                             last_name: response.data.last_name ? response.data.last_name : '',
+                             name: response.data.name ? response.data.name : '',
+                             password: response.data.password,
+                             phone_number: response.data.phone_number ? response.data.phone_number : '',
+                             admin: response.data.phone_number ? 'true' : 'false'
+                        },
+                        )
+                        sessionStorage.setItem('user', JSON.stringify(response.data))
+                        push('/home')
+                    }
+                })
+
+                
+                
             }
         })
     }

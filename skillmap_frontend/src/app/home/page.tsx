@@ -5,11 +5,18 @@ import { signOut } from 'next-auth/react';
 export default function Home(){
 
     return(
-        <div>Home
+        <div className='h-screen w-full'>
+
+            <nav>
+                
+            </nav>
+            
+            
+            
             <button onClick={
                 ()=>{
                     signOut()
-                    localStorage.clear()
+                    sessionStorage.clear()
                 }
                 }>signOut</button>
         </div>

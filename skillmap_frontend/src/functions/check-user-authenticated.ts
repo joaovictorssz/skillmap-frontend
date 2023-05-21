@@ -1,5 +1,5 @@
 export const checkUserAuthenticated = () => {
-    const userToken = localStorage.getItem('token')
+    const userToken = sessionStorage.getItem('token')
 
     return !!userToken
 }

@@ -20,7 +20,7 @@ const {push} = useRouter()
                 console.log(res)
                 if(res.data){
                     
-                    localStorage.setItem("token", res.data.token)
+                    sessionStorage.setItem("token", res.data.token)
                     push("/home")
                 }
                 else{

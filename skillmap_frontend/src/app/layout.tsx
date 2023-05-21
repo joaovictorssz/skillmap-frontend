@@ -7,6 +7,10 @@ import {usePathname} from 'next/navigation'
 import { PrivateRoute } from '@/components/Private'
 import { Toaster } from 'react-hot-toast'
 import ProvidersWrapper from '@/components/SessionWrapper/page'
+import Topbar from '@/components/Topbar'
+import { userContext } from './../contexts/UserContext';
+import { useEffect, useState } from 'react'
+import { UserTypes } from '@/@types/UserTypes'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -21,20 +25,56 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   const pathname = usePathname()
-
+  const [user, setUser] = useState<UserTypes>({
+    birth_date: '',
+    e_mail: '',
+    last_name: '',
+    name: '',
+    password: '',
+    phone_number: ''
+  })
   const isPublicPage = checkIsPublicRoute(pathname!)
+
+  useEffect(()=>{
+    console.log(user)
+  }, [user])
+
+  useEffect(()=>{
+    sessionStorage.getItem("user") ? setUser(JSON.parse(`${sessionStorage.getItem("user")}`)) : setUser({
+      birth_date: '',
+      e_mail: '',
+      last_name: '',
+      name: '',
+      password: '',
+      phone_number: ''
+    })
+    console.log(user)
+  }, [])
 
   return (
     <html lang="en">
       <body className={inter.className}>
+      <userContext.Provider value={{user: user, configUser: setUser}}>
         <ProvidersWrapper>
           <div>
             <Toaster/>
             {isPublicPage && children}
 
-            {!isPublicPage && <PrivateRoute>{children}</PrivateRoute>}
+            {!isPublicPage && 
+            
+              <PrivateRoute>
+              <>
+                <Topbar/>
+                <main className='mt-36'>
+                {children}
+                </main>
+              </>
+            </PrivateRoute>
+            
+            }
           </div>
         </ProvidersWrapper>
+        </userContext.Provider>
       </body>
     </html>
   )

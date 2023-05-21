@@ -17,12 +17,12 @@ export const PrivateRoute = ({children}:{children: ReactNode}) =>{
     }, [isUserAuthenticated, push])
 
     return (
-        <>
+        <div className="relative">
         
             {!isUserAuthenticated && null}
             {isUserAuthenticated && children}
 
-        </>
+        </div>
     )
 
 }
