@@ -48,11 +48,20 @@ export default function AdminPage(){
             .replace(/[^\w\s]/gi, "")
             .normalize("NFD")
             .replace(/[\u0300-\u036f]/g, "")
-            .replace(/[^\w\s-]/gi, "")}`, {type: data.img[0].type})
-            console.log(renamedFile.type)
-        imageFormData.append('file', renamedFile)
+            .replace(/[^\w\s-]/gi, "")}.jpeg`, {type: data.img[0].type})
+            imageFormData.append('file', renamedFile)
 
-        axios.post(`${process.env.NEXT_PUBLIC_API}/topics/create`, data)
+            await axios({
+                method: "post",
+                url: `http://localhost:3333/storage/upload`,
+                data: imageFormData,
+                headers: { "Content-Type": renamedFile.type },    
+            })
+            .then((imgUpload)=>{
+                console.log(imgUpload)
+            }) 
+
+        /*axios.post(`${process.env.NEXT_PUBLIC_API}/topics/create`, data)
         .then(async (response)=>{
             if(response.status ===201){
                 await axios({
@@ -65,7 +74,7 @@ export default function AdminPage(){
                     console.log(imgUpload)
                 })
             }
-        })
+        })**/
         
 
 
