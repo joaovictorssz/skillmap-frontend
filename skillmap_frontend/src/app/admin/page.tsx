@@ -34,34 +34,43 @@ export default function AdminPage(){
     let imageFormData : FormData = new FormData()
 
     async function handleCreateTopic(data: NewTopicTypes){
+
+        const imgName = `${data.category.toLowerCase().replace(/ /g, "")
+        .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^\w\s]/gi, "")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^\w\s-]/gi, "")
+    
+    }-${
+        data.name.toLowerCase().replace(/ /g, "")
+        .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^\w\s]/gi, "")
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^\w\s-]/gi, "")}.jpg`
+
         const renamedFile = new File(
-            [data.img[0]], `${data.category.toLowerCase().replace(/ /g, "")
-            .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-            .replace(/[^\w\s]/gi, "")
-            .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "")
-            .replace(/[^\w\s-]/gi, "")
-        
-        }-${
-            data.name.toLowerCase().replace(/ /g, "")
-            .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-            .replace(/[^\w\s]/gi, "")
-            .normalize("NFD")
-            .replace(/[\u0300-\u036f]/g, "")
-            .replace(/[^\w\s-]/gi, "")}.jpeg`, {type: data.img[0].type})
+            [data.img[0]], imgName, {type: data.img[0].type})
             imageFormData.append('file', renamedFile)
 
-            await axios({
-                method: "post",
-                url: `http://localhost:3333/storage/upload`,
-                data: imageFormData,
-                headers: { "Content-Type": renamedFile.type },    
-            })
-            .then((imgUpload)=>{
-                console.log(imgUpload)
-            }) 
 
-        /*axios.post(`${process.env.NEXT_PUBLIC_API}/topics/create`, data)
+        axios.post(`${process.env.NEXT_PUBLIC_API}/topics/create`, {
+            category: data.category,
+            name: data.name,
+            img: `https://skillmap-image-storage.s3.sa-east-1.amazonaws.com/${imgName}`,
+            overview:{
+                creators: data.overview.creators,
+                creation_date: data.overview.creation_date,
+                price: data.overview.price,
+                resume: data.overview.resume,
+                use: data.overview.use,
+                links: data.overview.links
+            },
+            roadmap:{
+                steps: roadmap
+            }
+        })
         .then(async (response)=>{
             if(response.status ===201){
                 await axios({
@@ -71,10 +80,10 @@ export default function AdminPage(){
                     headers: { "Content-Type": "multipart/form-data" },    
                 })
                 .then((imgUpload)=>{
-                    console.log(imgUpload)
+                    toast.success("Tópico criado com sucesso")
                 })
             }
-        })**/
+        })
         
 
 

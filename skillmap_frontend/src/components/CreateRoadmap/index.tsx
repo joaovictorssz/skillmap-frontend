@@ -13,12 +13,10 @@ export default function CreateRoadmap({setRoadmap}: {setRoadmap: (roadmap:  {nam
     ])
 
     const [stepName, setStepName] = useState<string>('')
-    const [subStepName, setSubStepName] = useState<string>('')
-    const tst = useRef<StepsTypes>([])
 
     function addStep(){
         setSteps([...steps!, {name: stepName}])
-        console.log(steps)
+
     }
 
     function removeStep(index: number){
