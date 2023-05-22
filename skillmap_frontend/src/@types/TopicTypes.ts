@@ -15,4 +15,5 @@ export interface TopicTypes{
             name: string
         }[]
     }
+    _id?: string
 }

@@ -25,13 +25,13 @@ export default function CreatePassword(){
             }
             else{
                 
-                axios.post('http://localhost:3333/auth/signup',{
+                axios.post(`${process.env.NEXT_PUBLIC_API}/auth/signup`,{
                     email: pathname?.replace('/create/', ''),
                     password: data.password
                 })
                 .then((res)=>{
                     console.log(res)
-                    localStorage.setItem("token", res.data.token)
+                    sessionStorage.setItem("token", res.data.token)
                     push('/home')
                         
                     

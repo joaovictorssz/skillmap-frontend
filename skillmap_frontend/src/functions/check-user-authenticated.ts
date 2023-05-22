@@ -1,5 +1,11 @@
-export const checkUserAuthenticated = () => {
-    const userToken = sessionStorage.getItem('token')
+'use client'
 
-    return !!userToken
+export const checkUserAuthenticated = () => {
+
+    if (typeof window !== 'undefined') {
+        // Perform localStorage action
+        const userToken = sessionStorage.getItem('token')      
+        return !!userToken
+    }
+    
 }

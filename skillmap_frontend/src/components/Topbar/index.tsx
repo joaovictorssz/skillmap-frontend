@@ -2,6 +2,7 @@ import { userContext } from "@/contexts/UserContext";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useContext } from "react";
+import { signOut } from 'next-auth/react';
 
 export default function Topbar(){
 
@@ -25,9 +26,15 @@ export default function Topbar(){
                     <Link className={`mx-3 ${pathName?.includes('historico') ? 'border-b-2 font-semibold border-default_purple' : 'text-slate-500'}`} href={'/historico'}>Seu histórico</Link>
                     <Link className={`mx-3 ${pathName?.includes('salvos') ? 'border-b-2 font-semibold border-default_purple' : 'text-slate-500'}`} href={'/salvos'}>Salvos</Link>
                     <Link className={`mx-3 ${pathName?.includes('categorias') ? 'border-b-2 font-semibold border-default_purple' : 'text-slate-500'}`} href={'/categorias'}>Categorias</Link>
-                    {user.admin === "true"  &&  <Link className={`mx-3 ${pathName?.includes('admin') ? 'border-b-2 font-semibold border-default_purple' : 'text-slate-500'}`} href={'/admin'}>Admin</Link>}
+                    {user.admin === "true"  &&  <Link className={`mx-3 ${pathName?.includes('admin_topics') ? 'border-b-2 font-semibold border-default_purple' : 'text-slate-500'}`} href={'/admin_topics'}>Add Topics</Link>}
+                    {user.admin === "true"  &&  <Link className={`mx-3 ${pathName?.includes('admin_questionaries') ? 'border-b-2 font-semibold border-default_purple' : 'text-slate-500'}`} href={'/admin_questionaries'}>Add Questionaries</Link>}
+
+                    
                 </section>
+
             </div>
+
+
         </div>
     )
 }

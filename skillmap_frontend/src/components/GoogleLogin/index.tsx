@@ -15,11 +15,11 @@ const {push} = useRouter()
     useEffect(()=>{
         if(session && session.user){
             console.log(session )
-            axios.get(`http://localhost:3333/users/${session.user.email}`)   
+            axios.get(`${process.env.NEXT_PUBLIC_API}/users/${session.user.email}`)   
             .then((res)=>{
                 console.log(res)
-                if(res.data){
-                    
+                if(res.data.token){
+                    console.log(res.data)
                     sessionStorage.setItem("token", res.data.token)
                     push("/home")
                 }
