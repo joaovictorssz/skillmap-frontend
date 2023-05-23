@@ -35,13 +35,13 @@ export default function Login(){
                     console.log(response)
                     if(response.status === 200){
                         configUser!({
-                             birth_date: 'tetes',
+                             birth_date: '',
                              e_mail: response.data.email,
                              last_name: response.data.last_name ? response.data.last_name : '',
                              name: response.data.name ? response.data.name : '',
                              password: response.data.password,
                              phone_number: response.data.phone_number ? response.data.phone_number : '',
-                             admin: response.data.phone_number ? 'true' : 'false'
+                             admin: response.data.admin ? 'true' : 'false'
                         },
                         )
                         sessionStorage.setItem('user', JSON.stringify(response.data))

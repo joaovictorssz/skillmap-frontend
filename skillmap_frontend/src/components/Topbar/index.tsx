@@ -10,7 +10,7 @@ export default function Topbar(){
     const pathName = usePathname()
 
     return(
-        <div className="w-full flex flex-col px-5 h-36 justify-center fixed top-0 bg-white z-50">
+        <div className="w-full flex flex-col px-5 h-36 justify-center fixed top-0 bg-white z-40">
             <div className="relative">
                 <section className="w-full flex justify-center items-center">
                     <input 

@@ -2,11 +2,15 @@
 
 import { useSession, signOut, signIn } from "next-auth/react"
 import { FcGoogle } from "react-icons/fc"
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { userContext } from "@/contexts/UserContext";
 
 export default function GoogleLogin({enableCreatePassword}:{enableCreatePassword: (isEnabled: boolean)=> void}){
+
+    
+    const { user,configUser } = useContext(userContext)
 
 const {data: session} = useSession()
 
@@ -18,9 +22,18 @@ const {push} = useRouter()
             axios.get(`${process.env.NEXT_PUBLIC_API}/users/${session.user.email}`)   
             .then((res)=>{
                 console.log(res)
-                if(res.data.token){
-                    console.log(res.data)
-                    sessionStorage.setItem("token", res.data.token)
+                if(res.data){
+                    configUser!({
+                        birth_date: '',
+                        e_mail: res.data.email,
+                        last_name: res.data.last_name ? res.data.last_name : '',
+                        name: res.data.name ? res.data.name : '',
+                        password: res.data.password,
+                        phone_number: res.data.phone_number ? res.data.phone_number : '',
+                        admin: res.data.admin ? 'true' : 'false'
+                   },
+                   )
+                    sessionStorage.setItem("token", 'dcwquifhq379fqweefq4827ghiuqwgi')
                     push("/home")
                 }
                 else{

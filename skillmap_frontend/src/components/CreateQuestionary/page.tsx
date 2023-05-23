@@ -79,13 +79,8 @@ export default  function CreateQuestionary(props: {setQuestionary:  (a: any)=>vo
                     <p>D:</p>
                     <input required placeholder="Alternativa" onChange={(e)=>{setD(e.target.value)}} type="text" className="px-4 w-full focus:outline-none" name="" id="" />
                 </section>
-                <section className="flex p-3 border border-slate-200 rounded my-2">
-                    <p>E:</p>
-                    <input required placeholder="Alternativa" onChange={(e)=>{setE(e.target.value)}} type="text" className="px-4 w-full focus:outline-none" name="" id="" />
-                </section>
 
-
-                <section className="flex p-3 border border-slate-200 rounded my-2 bg-slate-200">
+                 <section className="flex p-3 border border-slate-200 rounded my-2 bg-slate-200">
                     <p className="">Resposta  correta:</p>
                     <input required onChange={(e)=>{setAnswer(e.target.value)}} type="text" className="px-4 w-full focus:outline-none" name="" id="" />
                 </section>

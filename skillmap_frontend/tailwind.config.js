@@ -8,7 +8,7 @@ module.exports = {
     extend: {
       colors:{
         default_purple: '#6138EB'
-      }
+      },
     },
   },
   plugins: [],
