@@ -99,7 +99,7 @@ export default function QuestionaryInit(props: QuestTypes){
                     
                     {props.questions[questionNumber].alternatives.map((alternative, id)=>{
                         return (
-                            <div className="cursor-pointer">
+                            <div key={id} className="cursor-pointer">
                             
                             <section id={`item_${id}`} className="flex rounded-md border transition-colors cursor-pointer" onClick={()=>setClassname(id)}>
                                 <input className="hidden" onChange={(e)=>{test(e.target.value, questionNumber)}} type="radio" value={alternative.title} name={`alternative_choosen`}  id={`${id}`}/>

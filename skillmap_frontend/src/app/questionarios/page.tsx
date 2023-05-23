@@ -46,7 +46,7 @@ export default function Questionarios(){
             <main className="p-10 px-16">
                 {questionaries?.map((questionary, index: number)=>{
                     return (
-                        <div onClick={()=>handleQuestionary(questionary._id)} className="flex border bg-slate-100 border-slate-200 rounded-md w-2/3">
+                        <div key={index} onClick={()=>handleQuestionary(questionary._id)} className="flex border bg-slate-100 border-slate-200 rounded-md w-2/3">
                             <section className="bg-default_purple p-8 rounded-l-md text-white"><MdQuestionAnswer size={30}/></section>
                             <main className="flex w-full justify-between items-center">
                                 <div className="p-6">
