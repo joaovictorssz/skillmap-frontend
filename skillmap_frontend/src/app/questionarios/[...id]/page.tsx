@@ -6,6 +6,7 @@ import { useParams } from "next/navigation"
 import { useEffect, useState } from "react"
 
 type QuestionaryTypes={
+    _id:  string,
     category: string,
     difficult:  string,
     name: string,
@@ -62,7 +63,7 @@ export default function QuestionaryId(){
                 isQuestInit && 
                 <div>
 
-                    <QuestionaryInit questions={questionary?.questions!}/>
+                    <QuestionaryInit _id={questionary?._id!} name={questionary?.name!} questions={questionary?.questions!}/>
 
                 </div>
             }

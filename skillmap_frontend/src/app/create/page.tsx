@@ -29,8 +29,6 @@ export default function Create(){
                 name: data.name,
                 last_name: data.last_name,
                 email: data.e_mail,
-                phone_number: data.phone_number,
-                birth_date: data.birth_date,
                 password: password,
                 admin: "false"
             })
@@ -59,15 +57,9 @@ export default function Create(){
                         <section className='grid grid-cols-2 gap-x-6 gap-y-4'>
                             <input {...register('name')} type="text" placeholder='Nome' className='col-span-1 h-14 rounded bg-transparent border-2 border-slate-300 px-3'/>
                             <input {...register('last_name')} type="text" placeholder='Sobrenome' className='col-span-1 h-14 rounded bg-transparent border-2 border-slate-300 px-3'/>
-                            <input {...register('e_mail')} type="text" placeholder='E-mail' className='col-span-1 h-14 rounded bg-transparent border-2 border-slate-300 px-3'/>
-                            <input {...register('phone_number')} type="text" placeholder='N° de telefone' className='col-span-1 h-14 rounded bg-transparent border-2 border-slate-300 px-3'/>
-                            <section className='grid grid-cols-3 col-span-2 gap-x-6 gap-y-4 '>
-                            <input type="text" placeholder='Data de nasc.' className='col-span-1 h-14 rounded bg-transparent border-2 border-slate-300 px-3'/>
-                            <input type="text" placeholder='Mês de nasc.'className='col-span-1 h-14 rounded bg-transparent border-2 border-slate-300 px-3'/>
-                            <input type="text" placeholder='Ano de nasc.'className='col-span-1 h-14 rounded bg-transparent border-2 border-slate-300 px-3'/>
-                            </section>
-                            <input onChange={(e)=> setPassword(e.target.value)} type="text" placeholder='Senha' className='col-span-1 h-14 rounded bg-transparent border-2 border-slate-300 px-3'/>
-                            <input onChange={(e)=> setRepeatPassword(e.target.value)} type="text" placeholder='Confirme a senha' className='col-span-1 h-14 rounded bg-transparent border-2 border-slate-300 px-3'/>
+                            <input {...register('e_mail')} type="text" placeholder='E-mail' className='col-span-2 h-14 rounded bg-transparent border-2 border-slate-300 px-3'/>
+                            <input onChange={(e)=> setPassword(e.target.value)} type="password" placeholder='Senha' className='col-span-2 h-14 rounded bg-transparent border-2 border-slate-300 px-3'/>
+                            <input onChange={(e)=> setRepeatPassword(e.target.value)} type="password" placeholder='Confirme a senha' className='col-span-2 h-14 rounded bg-transparent border-2 border-slate-300 px-3'/>
                         </section>
 
                         <button type='submit' className='bg-default_purple rounded w-80 h-14 text-white mt-6'>Criar conta</button>

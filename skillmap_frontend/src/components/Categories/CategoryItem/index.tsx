@@ -11,6 +11,7 @@ type CategoryTypes = {
     name: string
 }
 
+
 export default function CategoryItem(props: CategoryTypes){
 
     const [categories, setCategories] = useState<TopicTypes[]>()
@@ -40,7 +41,7 @@ export default function CategoryItem(props: CategoryTypes){
                 })}
                 </div>
 
-                <footer className="cursor-pointer italic w-full text-end px-10 mt-[-20px]">Ver mais</footer>
+                <footer onClick={()=>push("/categorias")} className="cursor-pointer italic w-full text-end px-10 mt-[-20px]">Ver mais</footer>
 
                 </>
 

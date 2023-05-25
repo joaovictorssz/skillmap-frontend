@@ -12,13 +12,13 @@ export default function Topbar(){
     return(
         <div className="w-full flex flex-col px-5 h-36 justify-center fixed top-0 bg-white z-40">
             <div className="relative">
-                <section className="w-full flex justify-center items-center">
-                    <input 
-                    className="bg-slate-300 w-2/4 px-6 py-2 rounded-full text-slate-900" 
-                    type="text" 
-                    name="search" 
-                    id="search"
-                    placeholder="Pesquise por categorias (Ex: Design, Front-end...)"/>
+                <section className="w-full flex justify-end items-center">
+                <button className="bg-red-500 rounded px-6 y-4 text-white" onClick={
+                ()=>{
+                    signOut()
+                    sessionStorage.clear()
+                }
+                }>signOut</button>
                 </section>
                 <section className="w-full p-5">
                     <Link className={`mx-3 ${pathName?.includes('home') ? 'border-b-2 font-semibold border-default_purple' : 'text-slate-500'}`} href={'/home'}>Home</Link>

@@ -50,9 +50,9 @@ export default function Topic(){
             
             <main>
 
-            {section === 'overview' && <Overview data={topic}/>}
+            {section === 'overview' && <Overview id={topic._id!} data={topic}/>}
             {section === 'roadmap' && <Roadmap data={topic.roadmap}/>}
-            {section === 'video_list' && <VideoList/>}
+            {section === 'video_list' && <VideoList theme={topic.name}/>}
 
             </main>
 

@@ -24,12 +24,7 @@ export default function Home(){
             
             
             
-            <button onClick={
-                ()=>{
-                    signOut()
-                    sessionStorage.clear()
-                }
-                }>signOut</button>
+           
         </div>
     )
 }

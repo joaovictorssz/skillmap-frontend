@@ -35,13 +35,17 @@ export default function Login(){
                     console.log(response)
                     if(response.status === 200){
                         configUser!({
+                            _id: response.data._id,
                              birth_date: '',
                              e_mail: response.data.email,
                              last_name: response.data.last_name ? response.data.last_name : '',
                              name: response.data.name ? response.data.name : '',
                              password: response.data.password,
                              phone_number: response.data.phone_number ? response.data.phone_number : '',
-                             admin: response.data.admin ? 'true' : 'false'
+                             admin: response.data.admin ? 'true' : 'false',
+                             topics_saved: response.data.topics_saved,
+                             history: response.data.history,
+                             questionaries_saved: response.data.questionaries_saved
                         },
                         )
                         sessionStorage.setItem('user', JSON.stringify(response.data))
@@ -88,7 +92,7 @@ export default function Login(){
                 <span className='mt-4 font-semibold'>É novo por aqui? <Link className='text-default_purple' href={'create'}>Crie sua conta</Link></span>
             </aside>
             <aside className="w-[45%] flex flex-col justify-end bg-default_purple h-full">
-                <Image src={bg_login} alt='bg_login'/>
+                <Image className='w-full' src={bg_login} alt='bg_login'/>
             </aside>
 
         </div>
