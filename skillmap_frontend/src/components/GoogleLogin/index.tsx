@@ -30,7 +30,11 @@ const {push} = useRouter()
                         name: res.data.name ? res.data.name : '',
                         password: res.data.password,
                         phone_number: res.data.phone_number ? res.data.phone_number : '',
-                        admin: res.data.admin ? 'true' : 'false'
+                        admin: res.data.admin ? 'true' : 'false',
+                        _id: res.data._id,
+                        history: res.data.history,
+                        questionaries_saved: res.data.questionaries_saved,
+                        topics_saved: res.data.topics_saved
                    },
                    )
                     sessionStorage.setItem("token", 'dcwquifhq379fqweefq4827ghiuqwgi')
