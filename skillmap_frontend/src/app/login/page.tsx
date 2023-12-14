@@ -24,6 +24,7 @@ export default function Login(){
             email: data.email,
             password: data.password
         }).then((res)=>{
+            console.log(res,'dede')
             if(res.status === 401){
                 return toast.error("Email ou senha incorretos")
             }
@@ -60,6 +61,7 @@ export default function Login(){
     }
 
     const toastHandler = (data: {email: string, password: string})=>{
+        console.log(data)
         toast.promise(handleLogin(data), {
             error: "Algo deu errado!",
             loading: "Carregando...",

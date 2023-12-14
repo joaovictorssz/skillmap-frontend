@@ -24,7 +24,9 @@ export default function Create(){
     const {push} = useRouter()
 
     function createUser(data: UserTypes){
+        console.log(data)
         if(password !== '' && password === repeatPassword){
+            console.log("ok")
             axios.post(`${process.env.NEXT_PUBLIC_API}/auth/signup`, {
                 name: data.name,
                 last_name: data.last_name,
@@ -33,10 +35,14 @@ export default function Create(){
                 admin: "false"
             })
             .then((res)=>{
+                console.log(res)
                 if(res.status === 201){
                     toast.success("Usuário criado!")
                     push("/login")
                 }
+            })
+            .catch((err)=>{
+                console.log(err)
             })
         }
     }
